@@ -1,0 +1,64 @@
+﻿@model StudentTask.Models.Student
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="alert alert-info">Edit Student</h2>
+<hr />
+
+@using (Html.BeginForm("Edit", "Student", FormMethod.Post))
+{
+    @Html.HiddenFor(s => s.ID)
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(s => s.Name)
+        @Html.TextBoxFor(s => s.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(s => s.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.BirthDate)
+        @Html.EditorFor(s => s.BirthDate)
+        @Html.ValidationMessageFor(s => s.BirthDate, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.FieldId)
+        @Html.DropDownListFor(s => s.FieldId, ViewBag.Fields as SelectList, "Select Field", new { @class = "form-control" })
+        @Html.ValidationMessageFor(s => s.FieldId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.GovernorateId)
+        @Html.DropDownListFor(s => s.GovernorateId, ViewBag.Governorates as SelectList, "Select Governorate", new { @class = "form-control GovernorateDropDown" })
+        @Html.ValidationMessageFor(s => s.GovernorateId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.NeighborhoodId)
+        @if (Model.GovernorateId != 1)
+        {
+            @Html.DropDownListFor(s => s.NeighborhoodId, new List<SelectListItem>(), "Select Neighborhood", new { @class = "form-control NeighborhoodDropDown" })
+        }
+        else
+        {
+            @Html.DropDownListFor(s => s.NeighborhoodId, ViewBag.Neighborhoods as SelectList, "Select Neighborhood", new { @class = "form-control NeighborhoodDropDown" })
+        }
+        @Html.ValidationMessageFor(s => s.NeighborhoodId, "", new { @class = "text-danger" })
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+<br />
+@Html.ActionLink("Back To Students", "Index", null, new { @class = "btn btn-info" })
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function() {
+            CustomizeDropDownList('@Url.Action("GetNeighborhood","Student")');
+        })
+    </script>
+
+}

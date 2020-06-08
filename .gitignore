@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/StudentTask/StudentTask/Content
+/StudentTask/StudentTask/Scripts
+/StudentTask/StudentTask/Views/Shared/EditorTemplates
