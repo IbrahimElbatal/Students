@@ -1,4 +1,5 @@
-﻿using StudentTask.Models;
+﻿using System;
+using StudentTask.Models;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -37,6 +38,7 @@ namespace StudentTask.Controllers
             if (!ModelState.IsValid)
                 return View(teacher);
 
+            teacher.ID = !db.Teachers.Any() ? 1: db.Teachers.Max(t => t.ID) + 1;
             db.Teachers.Add(teacher);
             db.SaveChanges();
 
