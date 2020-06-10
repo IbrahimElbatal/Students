@@ -1,0 +1,37 @@
+﻿@model System.Collections.Generic.List<StudentTask.Models.Teacher>
+@{
+    ViewBag.Title = "Teachers";
+}
+
+<h2 class="alert alert-info">Teachers</h2>
+<hr />
+
+@Html.ActionLink("New Teacher", "Create","Teacher",null, new { @class = "btn btn-primary" })
+<table class="table table-hover table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Birth Date</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.Count == 0)
+        {
+            <tr>
+                <td colspan="5" class="text-center">No Teachers At this moment ,Please Add a teacher</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var teacher in Model)
+            {
+                <tr>
+                    <td>@teacher.Name</td>
+                    <td>@teacher.BirthDate.ToLongDateString()</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

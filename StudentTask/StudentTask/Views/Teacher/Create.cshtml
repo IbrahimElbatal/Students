@@ -1,0 +1,32 @@
+﻿@model StudentTask.Models.Teacher
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 class="alert alert-info">Create teacher</h2>
+<hr />
+
+@using (Html.BeginForm("Create", "Teacher", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(s => s.Name)
+        @Html.TextBoxFor(s => s.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(s => s.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.BirthDate)
+        @Html.EditorFor(s => s.BirthDate)
+        @Html.ValidationMessageFor(s => s.BirthDate, "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+<br />
+@Html.ActionLink("Back To Teachers", "Index", null, new { @class = "btn btn-info" })
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
