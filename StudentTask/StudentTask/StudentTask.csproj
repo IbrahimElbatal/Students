@@ -192,6 +192,7 @@
     <Compile Include="Models\StudentTeacher.cs">
       <DependentUpon>StudentModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>StudentModel.tt</DependentUpon>
     </Compile>

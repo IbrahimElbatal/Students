@@ -25,6 +25,7 @@ namespace StudentTask.Controllers
                 .Include(s => s.Field)
                 .Include(s => s.Neighborhood)
                 .Include(s => s.Governorate)
+                .Include(st => st.StudentTeachers.Select(s => s.Teacher))
                 .ToList();
 
             return View(students);
