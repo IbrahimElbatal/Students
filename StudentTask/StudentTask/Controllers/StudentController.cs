@@ -109,6 +109,15 @@ namespace StudentTask.Controllers
             var student = db.Students.FirstOrDefault(s => s.ID == id);
             if (student == null)
                 return HttpNotFound($"the student with Id {id} not found.");
+            if (student.StudentTeachers.Any())
+            {
+                //this code for when delete student not delete because it is attatched to teacher
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest,
+                //"Not Allow To delete This Student Because of it is attached to a teacher.");
+
+                // this code delete student although it is attatched to teacher
+                db.StudentTeachers.RemoveRange(student.StudentTeachers);
+            }
 
             db.Students.Remove(student);
             db.SaveChanges();

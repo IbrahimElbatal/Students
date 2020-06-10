@@ -23,20 +23,20 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(s => s.FieldId)
-        @Html.DropDownListFor(s=>s.FieldId,ViewBag.Fields as SelectList,"Select Field",new{@class="form-control"})
+        @Html.DropDownListFor(s => s.FieldId, ViewBag.Fields as SelectList, "Select Field", new { @class = "form-control" })
         @Html.ValidationMessageFor(s => s.FieldId, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(s=>s.GovernorateId)
-        @Html.DropDownListFor(s => s.GovernorateId, ViewBag.Governorates as SelectList, "Select Governorate", new{@class= "form-control GovernorateDropDown" })
-        @Html.ValidationMessageFor(s=>s.GovernorateId,"",new{@class="text-danger"})
+        @Html.LabelFor(s => s.GovernorateId)
+        @Html.DropDownListFor(s => s.GovernorateId, ViewBag.Governorates as SelectList, "Select Governorate", new { @class = "form-control GovernorateDropDown" })
+        @Html.ValidationMessageFor(s => s.GovernorateId, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(s => s.NeighborhoodId) 
-        @Html.DropDownListFor(s=>s.NeighborhoodId,new List<SelectListItem>(), "Select Neighborhood", new { @class = "form-control NeighborhoodDropDown" })
+        @Html.LabelFor(s => s.NeighborhoodId)
+        @Html.DropDownListFor(s => s.NeighborhoodId, new List<SelectListItem>(), "Select Neighborhood", new { @class = "form-control NeighborhoodDropDown" })
         @Html.ValidationMessageFor(s => s.NeighborhoodId, "", new { @class = "text-danger" })
     </div>
-
+  
     <button type="submit" class="btn btn-primary">Save</button>
 }
 <br />

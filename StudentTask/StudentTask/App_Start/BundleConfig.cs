@@ -22,7 +22,8 @@ namespace StudentTask
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/app/app.js",
-                      "~/Scripts/app/datepicker.js"));
+                      "~/Scripts/app/datepicker.js",
+                      "~/Scripts/app/teacher.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

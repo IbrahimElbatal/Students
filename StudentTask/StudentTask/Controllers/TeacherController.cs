@@ -1,6 +1,4 @@
-﻿using System;
-using StudentTask.Models;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 
 namespace StudentTask.Controllers
@@ -29,20 +27,8 @@ namespace StudentTask.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.Students = db.Students.ToList();
             return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Teacher teacher)
-        {
-            if (!ModelState.IsValid)
-                return View(teacher);
-
-            teacher.ID = !db.Teachers.Any() ? 1: db.Teachers.Max(t => t.ID) + 1;
-            db.Teachers.Add(teacher);
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
         }
     }
 }

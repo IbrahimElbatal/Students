@@ -1,4 +1,5 @@
-﻿@model StudentTask.Models.Teacher
+﻿@using StudentTask.Models
+@model StudentTask.Models.Teacher
 
 
 @{
@@ -8,19 +9,39 @@
 <h2 class="alert alert-info">Create teacher</h2>
 <hr />
 
-@using (Html.BeginForm("Create", "Teacher", FormMethod.Post))
+@using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(s => s.Name)
         @Html.TextBoxFor(s => s.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(s => s.Name, "", new { @class = "text-danger" })
+        <span style="display: none" class="text-danger">Name Field is Required.</span>
     </div>
     <div class="form-group">
         @Html.LabelFor(s => s.BirthDate)
         @Html.EditorFor(s => s.BirthDate)
-        @Html.ValidationMessageFor(s => s.BirthDate, "", new { @class = "text-danger" })
+        <span style="display: none" class="text-danger">Birth Date Field is Required.</span>
+    </div>
+    <div style="width: 50%">
+        <label>Add Students To This Teacher </label>
+        @if (!(ViewBag.Students as IEnumerable<Student>).Any())
+        {
+            <p class="alert alert-warning">Please Add teachers First and then add student.</p>
+        }
+        else
+        {
+            <ul class="list-group">
+
+                @foreach (var student in ViewBag.Students as IEnumerable<Student>)
+                {
+                    <li class="list-group-item">
+                        @student.Name
+                        <button  data-id="@student.ID" type="button" class="addButton pull-right btn btn-primary btn-sm">Add</button>
+                        <button data-id="@student.ID" style="display: none" type="button" class="removeButton pull-right btn btn-danger btn-sm">Remove</button>
+                    </li>
+                }
+            </ul>
+        }
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 }
@@ -29,4 +50,9 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function() {
+            saveTeacher('@Url.Action("Index","Teacher")');
+        });
+    </script>
 }
